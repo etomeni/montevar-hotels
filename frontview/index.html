@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <!-- <link href="style.css" rel="stylesheet"> -->
+</head>
+<body>
+
+<main>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        label.form-label {
+            box-sizing: border-box;
+            color: rgb(33, 37, 41);
+            /* display inline-block */
+            font-size: 16px;
+            font-weight: 400;
+            height: 24px;
+            line-height: 24px;
+            margin-bottom: 8px;
+            text-align: start;
+        }
+
+        input.form-control {
+            height: 50px;
+            color: #2d3652;
+            border: 1px solid #e8e8e8;
+            background-color: #fcfcff;
+            border-radius: 0;
+            padding: 10px 20px;
+            width: 100%;
+            outline: none;
+        }
+
+        input.form-control:hover {
+            border-color: #ffbf00;
+        }
+
+        input.form-control:active,
+        input.form-control:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #F6A344;
+        }
+
+        #submitBtn {
+            background-color: #F6A344;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+
+        #submitBtn:hover {
+            background-color: #ffbf00;
+        }
+
+        .errorText {
+            color: red;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        input.errorInput {
+            border-color: red;
+        }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+            max-width: 100% !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 30px;
+        }
+
+        #successMsg,
+        #errorMsg {
+            display: none;
+            font-size: 14px;
+        }
+    
+    </style>
+    
+
+    <form id="reservationForm" onsubmit="return submitForm(this)">
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label for="surname" class="form-label">Surname</label>
+                <input type="text" required id="surname" name="surname" 
+                    class="form-control" placeholder="Surname" aria-label="surnameHelp"
+                    onblur="validateInput(this)"
+                />
+                <div id="surnameHelp" class="form-text errorText"></div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" required id="firstName" name="firstName" 
+                    class="form-control" placeholder="First name" aria-label="firstNameHelp"
+                    onblur="validateInput(this)"
+                />
+
+                <div id="firstNameHelp" class="form-text errorText"></div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="emailAddress" class="form-label">Email address</label>
+            <input type="email" required id="emailAddress" name="email" 
+                class="form-control" aria-label="emailHelp" aria-describedby="emailHelp" 
+                onblur="validateInput(this)"
+            />
+            <div id="emailHelp" class="form-text errorText"></div>
+        </div>
+
+        <div class="mb-4">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber"
+                class="form-control" aria-label="phoneNumberHelp" aria-describedby="phoneNumberHelp"
+                onblur="validateInput(this)"
+            />
+            <div id="phoneNumberHelp" class="form-text errorText"></div>
+        </div>
+
+        <div class="mb-4">
+            <label for="checkIn" class="form-label">Check in</label>
+            <input type="date" required id="checkIn" name="checkIn"
+                class="form-control" aria-label="checkInHelp" aria-describedby="checkInHelp" 
+                onblur="validateInput(this)" onchange="handleCheckInDate(this.value)"
+            />
+            <!-- min="<?php echo date('Y-m-d'); ?>" -->
+            <div id="checkInHelp" class="form-text errorText"></div>
+        </div>
+
+        <div class="mb-4">
+            <label for="checkOut" class="form-label">Check out</label>
+            <input type="date" required id="checkOut" name="checkOut"
+                class="form-control" aria-label="checkOutHelp" aria-describedby="checkOutHelp"
+                onblur="validateInput(this)"
+            />
+            <!-- min="<?php echo date('Y-m-d'); ?>" -->
+            <div id="checkOutHelp" class="form-text errorText"></div>
+        </div>
+
+        <div class="mb-4">
+            <label for="guestPerRoom" class="form-label">
+                Number of expected guest per room
+            </label>
+            <input type="number" required id="guestPerRoom" name="guestPerRoom"
+                class="form-control" min="1" max="2" placeholder="1 - 2"
+                aria-label="guestPerRoomHelp" aria-describedby="guestPerRoomHelp"
+                onblur="validateInput(this)"
+            />
+            <!-- min="<?php echo date('Y-m-d'); ?>" -->
+            <div id="guestPerRoomHelp" class="form-text errorText"></div>
+        </div>
+
+
+        <div class="alert alert-success" id="successMsg" role="alert"></div>
+        <div class="alert alert-danger" id="errorMsg" role="alert"></div>
+
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" id="submitBtn" class="btn btn-primary"
+            >Reserve Now</button>
+        </div>
+    </form>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            const checkIn = document.getElementById("checkIn");
+            checkIn.setAttribute("min", getCurrentDate());
+
+            const checkOut = document.getElementById("checkOut");
+            checkOut.setAttribute("min", getCurrentDate());
+        });
+        
+        function getCurrentDate() {
+            const today = new Date();
+
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            // getMonth() returns 0-11, so add 1
+            const day = String(today.getDate()).padStart(2, '0');
+
+            return `${year}-${month}-${day}`;
+        }
+        
+        function getCurrentDateTime() {
+            const options = {
+                weekday: 'short',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            };
+
+            const now = new Date();
+            return now.toLocaleString('en-US', options);
+        }
+
+        function handleCheckInDate(value) {
+            if (value) {
+                const checkOut = document.getElementById("checkOut");
+                checkOut.setAttribute("min", value);
+            }
+
+            return true;
+        }
+        
+        function validateInput(inputField) {
+            // console.log(inputField);
+            const id = inputField.getAttribute('id');
+            const ariaLabel = inputField.getAttribute('aria-label');
+            const inputValue = inputField.value;
+        
+            const element = document.getElementById(id);
+            // Add your validation logic here
+            if (!inputValue) {
+                document.getElementById(ariaLabel).innerText = "Please enter a value.";
+                // document.getElementById(ariaLabel).className = "errorText";
+
+                element.classList.add("errorInput");
+
+                // errorText
+                return false;
+            } else {
+                document.getElementById(ariaLabel).innerText = "";
+
+                // const element = document.getElementById(id);
+                element.classList.remove("errorInput");
+            }
+        
+            // Other validation checks
+        
+            return true;
+        }
+
+
+        function sendData2backend(data2backend) {
+            console.log(data2backend);
+            
+            const endPointUrl = "http://localhost:3000";
+            const apiUrl = `${endPointUrl}/api/v1/sendNewBookingMail`;
+
+            localStorage.removeItem("bookingReservation");
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: JSON.stringify(data2backend),
+                redirect: "follow"
+            };
+
+            fetch(apiUrl, requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    const errorMsg = document.getElementById("errorMsg");
+                    errorMsg.style.display = "block";
+                    errorMsg.innerText = "Network response was not ok.";
+                };
+                return response.json();
+            })
+            .then(data => {
+                // Handle successful response
+                console.log('API response:', data);
+
+                if (data.status) {
+                    const successMsg = document.getElementById("successMsg");
+                    successMsg.style.display = "block";
+                    successMsg.innerText = data.message || '';
+
+                    localStorage.setItem('bookingReservation', JSON.stringify(data2backend));
+                    // redirect to success page
+
+                    const newUrl = `${window.location.origin}/booking-successful/`;
+                    window.location.href = newUrl;
+
+                    // https://www.montevarhotel.com/booking-successful/
+
+
+                } else {
+                    const errorMsg = document.getElementById("errorMsg");
+                    errorMsg.style.display = "block";
+                    errorMsg.innerText = data.message || "an unexpected error happened.";
+                }
+
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error:', error);
+
+                // const errorMsg = document.getElementById("errorMsg");
+                // errorMsg.style.display = "block";
+                // errorMsg.innerText = error.message || "Network response was not ok.";
+            });
+        }
+
+
+        function submitForm(form) {
+            const formData = new FormData(form);
+            const formDataObject = {};
+            for (let [key, value] of formData.entries()) formDataObject[key] = value;
+
+            const data2backend = {
+                ...formDataObject,
+
+                bookingDate: getCurrentDateTime(),
+                year: new Date().getFullYear(),
+                hotelName: "Montevar Hotels",
+                hotelPhoneNumber: "0706 099 6380",
+                hotelEmail: "montevarhotelsuites@gmail.com",
+            };
+
+            localStorage.setItem('bookingReservation', JSON.stringify(data2backend));
+            // return false;
+
+
+
+            // Your validation logic here
+            // ...
+            
+            // Assuming validation passes, log the form data
+
+            const response = sendData2backend(data2backend);
+            
+            return false;
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</main>
+    
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+    <!-- <script src="./script.js"></script> -->
+</body>
+</html>

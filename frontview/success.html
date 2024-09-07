@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <!-- <link href="style.css" rel="stylesheet"> -->
+</head>
+<body>
+
+<main>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        #successContainer  {
+            color: rgb(33, 37, 41);
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        #successContainer a {
+            text-decoration: none;
+            color: rgb(33, 37, 41);
+        }
+
+        #successContainer a:focus,
+        #successContainer a:active,
+        #successContainer a:hover {
+            color: #F6A344;
+        }
+
+        #successContainer a.contactUs {
+            color: #F6A344;
+        }
+
+
+        #successContainer a.contactUs:focus,
+        #successContainer a.contactUs:active,
+        #successContainer a.contactUs:hover {
+            color: #ffbf00;
+        }
+
+
+
+        tbody th.contentTitle {
+            /* background: #008000; */
+            min-width: 140px !important;
+            max-width: 200px !important;
+            /* width: 30%; */
+        }
+
+        /* tbody td.contactValue {
+            background: yellow;
+            width: 100%;
+        } */
+
+        /* tbody tr {
+            margin-bottom: 100px !important;
+        } */
+
+
+        .errorText {
+            color: red;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+
+        .mb-4 {
+            margin-bottom: 30px;
+        }
+
+    </style>
+
+    <section id="successContainer">
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <!-- <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead> -->
+        
+                <tbody>
+                    <tr>
+                        <th scope="row" class="contentTitle">Check In Date</th>
+                        <td class="contactValue">
+                            <p id="checkIn"></p>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Check Out Date</th>
+                        <td class="contactValue">
+                            <p id="checkOut"></p>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Guest Name</th>
+                        <td class="contactValue">
+                            <p id="guestName">Mark</p>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Phone Number</th>
+                        <td class="contactValue">
+                            <p id="phoneNumber"></p>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Email Address</th>
+                        <td class="contactValue">
+                            <p id="emailAddress"></p>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Guest Per Room</th>
+                        <td class="contactValue">
+                            <p id="guestPerRoom"></p>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Booking Date</th>
+                        <td class="contactValue">
+                            <p id="bookingDate"></p>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Hotel Name</th>
+                        <td class="contactValue">
+                            <p id="hotelName">Montevar Hotels</p>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Hotel address</th>
+                        <td class="contactValue">
+                            <address id="hotelAddress">
+                                <a href="https://maps.app.goo.gl/ZBncFJsyuZhJZXhU7" target="_blank">
+                                    1 Montevar Street, Ofumwengbe Community Road, EBO Rd, 
+                                    off Airport, GRA, Benin City, Edo State, Nigeria.
+                                </a>
+                            </address>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Hotel Phone Number</th>
+                        <td class="contactValue">
+                            <p id="hotelPhoneNumber">
+                                <a href="tel:07060996380">0706 099 6380</a>
+                            </p>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Hotel Email Address</th>
+                        <td class="contactValue">
+                            <p id="hotelEmail">
+                                <a href="mailto:montevarhotelsuites@gmail.com">montevarhotelsuites@gmail.com</a>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div style="height: 50px;"></div>
+    
+        <div>
+            <p class="text-center">
+                N:B - All payments should be made to only Montevar Hotels official Account
+            </p>
+        
+            <p class="text-center">
+                Your Booking has been made successfully. 
+                Please kindly check your email and phone for your booking details.
+            </p>
+        
+            <p class="text-center">
+                Please 
+                <a href="https://www.montevarhotel.com/contact" class="contactUs">contact us</a>
+                if you have any issue.
+            </p>
+        </div>
+    </section>
+
+
+    <script>
+        
+        function getSessionValue () {
+            const data = JSON.parse(sessionStorage.getItem('bookingReservation'));
+
+            if (data && data !== null) {
+                const guestName = document.getElementById("guestName");
+                guestName.innerText = `${data.firstName} ${data.surname}`;
+    
+                const checkIn = document.getElementById("checkIn");
+                checkIn.innerText = data.checkIn;
+    
+                const checkOut = document.getElementById("checkOut");
+                checkOut.innerText = data.checkOut;
+    
+                const phoneNumber = document.getElementById("phoneNumber");
+                phoneNumber.innerText = data.phoneNumber;
+    
+                const email = document.getElementById("emailAddress");
+                email.innerText = data.email;
+    
+                const guestPerRoom = document.getElementById("guestPerRoom");
+                guestPerRoom.innerText = data.guestPerRoom;
+    
+    
+                const bookingDate = document.getElementById("bookingDate");
+                bookingDate.innerText = data.bookingDate;
+    
+                const hotelName = document.getElementById("hotelName");
+                hotelName.innerText = data.hotelName;
+            }
+        }
+
+        
+        window.addEventListener("DOMContentLoaded", function() {
+            getSessionValue();
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</main>
+    
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+    <!-- <script src="./script.js"></script> -->
+</body>
+</html>
