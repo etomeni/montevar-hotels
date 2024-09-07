@@ -6,7 +6,7 @@ const router = express.Router();
 // Controllers
 import { 
     sendNewBookingMailCtrl,
-} from '@/controllers/sendMailController.js';
+} from './../controllers/sendMailController.js';
 
 // middleWares
 // import authMiddleware from '../middleware/auth.js'

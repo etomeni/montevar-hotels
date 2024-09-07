@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 const router = express.Router();
 // Controllers
-import { sendNewBookingMailCtrl, } from '@/controllers/sendMailController.js';
+import { sendNewBookingMailCtrl, } from './../controllers/sendMailController.js';
 // middleWares
 // import authMiddleware from '../middleware/auth.js'
 router.use(bodyParser.json());

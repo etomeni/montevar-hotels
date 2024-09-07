@@ -10,9 +10,9 @@ import cors from 'cors';
 // import mongoose from 'mongoose';
 import 'dotenv/config';
 
-import emailRoutes from '@/routes/sendEmails.js';
+import emailRoutes from './routes/sendEmails.js';
 
-import { get404, get500 } from '@/controllers/error.js';
+import { get404, get500 } from './controllers/error.js';
 
 const app = express();
 app.use(helmet());

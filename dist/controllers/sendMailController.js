@@ -1,7 +1,7 @@
 // import nodemailer from 'nodemailer';
 // import axios from "axios";
-import { getCurrentDateTime } from "@/util/resources.js";
-import { sendAdminMailFunc, sendClientMailFunc } from "@/util/mails.js";
+import { getCurrentDateTime } from "./../util/resources.js";
+import { sendAdminMailFunc, sendClientMailFunc } from "./../util/mails.js";
 export const sendNewBookingMailCtrl = async (req, res, next) => {
     try {
         const surname = req.body.surname || "";
