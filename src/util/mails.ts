@@ -25,7 +25,7 @@ export const sendClientMailFunc = (
         });
 
         // Read the HTML file synchronously
-        const data = fs.readFileSync("./src/emailTemplates/clientBooking.html", 'utf8');
+        const data = fs.readFileSync("./../emailTemplates/clientBooking.html", 'utf8');
         
 
         // Replace the placeholder with a dynamic value (e.g., "John")
@@ -127,7 +127,7 @@ export const sendAdminMailFunc = (
         });
 
         // Read the HTML file synchronously
-        const data = fs.readFileSync("./src/emailTemplates/adminBooking.html", 'utf8');
+        const data = fs.readFileSync("./../emailTemplates/adminBooking.html", 'utf8');
         
 
         // Replace the placeholder with a dynamic value (e.g., "John")

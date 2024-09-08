@@ -93,6 +93,10 @@
             display: none;
             font-size: 14px;
         }
+
+        #btnLoading {
+            display: none;
+        }
     
     </style>
     
@@ -176,8 +180,13 @@
 
 
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" id="submitBtn" class="btn btn-primary"
-            >Reserve Now</button>
+            <button type="submit" id="submitBtn" class="btn btn-primary">
+                <span id="btnText">Reserve Now</span>
+
+                <div class="spinner-grow spinner-grow-sm" role="status" id="btnLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </button>
         </div>
     </form>
 
@@ -190,6 +199,8 @@
             checkOut.setAttribute("min", getCurrentDate());
         });
         
+        const endPointUrl = "https://montevar-hotels.onrender.com"; // "http://localhost:3000";
+
         function getCurrentDate() {
             const today = new Date();
 
@@ -254,10 +265,48 @@
         }
 
 
+        function wakeServer() {
+            const apiUrl = `${endPointUrl}/api/v1/sendNewBookingMail`;
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: JSON.stringify({}),
+                redirect: "follow"
+            };
+
+            fetch(apiUrl, requestOptions)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                // Handle successful response
+                console.log('API response:', data);
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error:', error);
+            });
+        }
+
+
         function sendData2backend(data2backend) {
             console.log(data2backend);
+            const submitBtn = document.getElementById("submitBtn");
+            const btnText = document.getElementById("btnText");
+            const btnLoading = document.getElementById("btnLoading");
+            // Disable the button
+            submitBtn.disabled = true;
+            btnText.style.display = "none";
+            btnLoading.style.display = "inline-block";
+
+
+            return;
+
             
-            const endPointUrl = "http://localhost:3000";
+            const endPointUrl = "https://montevar-hotels.onrender.com"; // "http://localhost:3000";
             const apiUrl = `${endPointUrl}/api/v1/sendNewBookingMail`;
 
             localStorage.removeItem("bookingReservation");
@@ -304,10 +353,19 @@
                     errorMsg.innerText = data.message || "an unexpected error happened.";
                 }
 
+                // Enable the button
+                submitBtn.disabled = false;
+                btnText.style.display = "inline";
+                btnLoading.style.display = "none";
             })
             .catch(error => {
                 // Handle errors
                 console.error('Error:', error);
+
+                // Enable the button (if needed)
+                submitBtn.disabled = false;
+                btnText.style.display = "inline";
+                btnLoading.style.display = "none";
 
                 // const errorMsg = document.getElementById("errorMsg");
                 // errorMsg.style.display = "block";
