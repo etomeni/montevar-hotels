@@ -25,9 +25,8 @@ export const sendClientMailFunc = (
             }
         });
 
-        // Read the HTML file synchronously
-        const data = fs.readFileSync("./../emailTemplates/clientBooking.html", 'utf8');
-        
+        // Read the file synchronously with utf8 encoding
+        const data = fs.readFileSync("./src/emailTemplates/clientBooking.html", 'utf8');
 
         // Replace the placeholder with a dynamic value (e.g., "John")
         const Htmltemplate = data.replace(/{{firstName}}/g, firstName)
@@ -132,9 +131,8 @@ export const sendAdminMailFunc = (
             }
         });
 
-        // Read the HTML file synchronously
-        const data = fs.readFileSync("./../emailTemplates/adminBooking.html", 'utf8');
-        
+        // Read the file synchronously with utf8 encoding
+        const data = fs.readFileSync("./src/emailTemplates/adminBooking.html", 'utf8');
 
         // Replace the placeholder with a dynamic value (e.g., "John")
         const Htmltemplate = data.replace(/{{firstName}}/g, firstName)
@@ -146,6 +144,9 @@ export const sendAdminMailFunc = (
             .replace(/{{checkOutDate}}/g, checkOutDate)
             .replace(/{{guestPerRoom}}/g, guestPerRoom)
             .replace(/{{bookingDate}}/g, bookingDate)
+
+            .replace(/{{roomsCategory}}/g, roomsCategory)
+            .replace(/{{roomsName}}/g, roomsName)
 
             .replace(/{{hotelName}}/g, hotelName)
             .replace(/{{hotelPhoneNumber}}/g, hotelPhoneNumber)
@@ -188,6 +189,7 @@ export const sendAdminMailFunc = (
         const details = {
             from: `${hotelName} <${ process.env.HOST_EMAIL }>`,
             to: `${hotelEmail}, montevarhotels@gmail.com`,
+            // to: `montevarhotels@gmail.com`,
             cc: "sundaywht@gmail.com",
             replyTo: `${email}`,
             subject: `New Reservation Notification - ${hotelName}`,

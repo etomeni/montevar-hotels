@@ -1,7 +1,7 @@
 import fs from "fs";
 // import Jwt from "jsonwebtoken";
 import nodemailer from 'nodemailer';
-export const sendClientMailFunc = (surname, firstName, email, phoneNumber, checkInDate, checkOutDate, guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber, hotelEmail) => {
+export const sendClientMailFunc = (surname, firstName, email, phoneNumber, checkInDate, checkOutDate, guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber, hotelEmail, roomsCategory, roomsName) => {
     try {
         // console.log(process.env.HOST_EMAIL);
         const mailTransporter = nodemailer.createTransport({
@@ -14,7 +14,7 @@ export const sendClientMailFunc = (surname, firstName, email, phoneNumber, check
             }
         });
         // Read the HTML file synchronously
-        const data = fs.readFileSync("./src/emailTemplates/clientBooking.html", 'utf8');
+        const data = fs.readFileSync("./../emailTemplates/clientBooking.html", 'utf8');
         // Replace the placeholder with a dynamic value (e.g., "John")
         const Htmltemplate = data.replace(/{{firstName}}/g, firstName)
             .replace(/{{surname}}/g, surname)
@@ -25,6 +25,8 @@ export const sendClientMailFunc = (surname, firstName, email, phoneNumber, check
             .replace(/{{checkOutDate}}/g, checkOutDate)
             .replace(/{{guestPerRoom}}/g, guestPerRoom)
             .replace(/{{bookingDate}}/g, bookingDate)
+            .replace(/{{roomsCategory}}/g, roomsCategory)
+            .replace(/{{roomsName}}/g, roomsName)
             .replace(/{{hotelName}}/g, hotelName)
             .replace(/{{hotelPhoneNumber}}/g, hotelPhoneNumber)
             .replace(/{{hotelEmail}}/g, hotelEmail)
@@ -41,6 +43,7 @@ export const sendClientMailFunc = (surname, firstName, email, phoneNumber, check
             - Check-In Date: ${checkInDate}
             - Check-Out Date: ${checkOutDate}
             - Guests per Room: ${guestPerRoom}
+            - Room: ${roomsCategory} - ${roomsName}
 
             - Booking Date: ${bookingDate}
             - Hotel Name: ${hotelName}
@@ -84,7 +87,7 @@ export const sendClientMailFunc = (surname, firstName, email, phoneNumber, check
         };
     }
 };
-export const sendAdminMailFunc = (surname, firstName, email, phoneNumber, checkInDate, checkOutDate, guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber, hotelEmail) => {
+export const sendAdminMailFunc = (surname, firstName, email, phoneNumber, checkInDate, checkOutDate, guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber, hotelEmail, roomsCategory, roomsName) => {
     try {
         // console.log(process.env.HOST_EMAIL);
         const mailTransporter = nodemailer.createTransport({
@@ -97,7 +100,7 @@ export const sendAdminMailFunc = (surname, firstName, email, phoneNumber, checkI
             }
         });
         // Read the HTML file synchronously
-        const data = fs.readFileSync("./src/emailTemplates/adminBooking.html", 'utf8');
+        const data = fs.readFileSync("./../emailTemplates/adminBooking.html", 'utf8');
         // Replace the placeholder with a dynamic value (e.g., "John")
         const Htmltemplate = data.replace(/{{firstName}}/g, firstName)
             .replace(/{{surname}}/g, surname)
@@ -131,6 +134,7 @@ export const sendAdminMailFunc = (surname, firstName, email, phoneNumber, checkI
             - Check-In Date: ${checkInDate}
             - Check-Out Date: ${checkOutDate}
             - Guests per Room: ${guestPerRoom}
+            - Room Name: ${roomsCategory} - ${roomsName}
             - Booking Date: ${bookingDate}
 
 

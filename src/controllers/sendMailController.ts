@@ -31,7 +31,7 @@ export const sendNewBookingMailCtrl = async (req: Request, res: Response, next: 
                 message: "All fields are required.",
             });
         }
-
+        
         const clientMailRes = sendClientMailFunc(
             surname, firstName, email, phoneNumber, checkIn, checkOut,
             guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber,

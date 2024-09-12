@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #F6A344;
+            color: #ffffff;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content p {
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .details {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+        }
+        .content .details p {
+            margin: 5px 0;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #F6A344;
+            color: #ffffff;
+            border-radius: 0 0 8px 8px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="email-container">
+    <div class="header">
+        <h1>Reservation Confirmed</h1>
+    </div>
+    <div class="content">
+        <p>Dear <strong>{{firstName}} {{surname}}</strong>,</p>
+
+        <p>Thank you for choosing Montevar Hotel. We are pleased to confirm your reservation. Below are the details of your booking:</p>
+
+        <div class="details">
+            <p><strong>Reservation Details:</strong></p>
+            <p><strong>Check-In Date:</strong> {{checkInDate}}</p>
+            <p><strong>Check-Out Date:</strong> {{checkOutDate}}</p>
+            <p><strong>Guests per Room:</strong> {{guestPerRoom}}</p>
+
+            <p><strong>Booking Date:</strong> {{bookingDate}}</p>
+            <p><strong>Hotel Name:</strong> {{hotelName}}</p>
+            <p><strong>Hotel Phone Number:</strong> {{hotelPhoneNumber}}</p>
+            <p><strong>Room Name:</strong> {{roomsCategory}} - {{roomsName}}</p>
+
+        </div>
+
+        <p>
+            If you have any questions or need further assistance, 
+            feel free to contact us at {{hotelEmail}} or call us at 
+            {{hotelPhoneNumber}}. We look forward to welcoming you to our hotel!
+        </p>
+
+        <p>
+            N:B - All payments should be made to only {{hotelName}} official Account
+        </p>
+
+        <p>Best Regards,<br>{{hotelName}}</p>
+    </div>
+    <div class="footer">
+        <p>&copy; {{year}} {{hotelName}}. All rights reserved.</p>
+    </div>
+</div>
+
+</body>
+</html>

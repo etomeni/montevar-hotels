@@ -11,6 +11,8 @@ export const sendNewBookingMailCtrl = async (req, res, next) => {
         const checkIn = req.body.checkIn || "";
         const checkOut = req.body.checkOut || "";
         const guestPerRoom = req.body.guestPerRoom || "";
+        const roomsCategory = req.body.roomsCategory || "";
+        const roomsName = req.body.roomsName || "";
         const bookingDate = req.body.bookingDate || getCurrentDateTime();
         const year = req.body.year || new Date().getFullYear();
         const hotelName = req.body.hotelName || "Montevar Hotels";
@@ -23,8 +25,8 @@ export const sendNewBookingMailCtrl = async (req, res, next) => {
                 message: "All fields are required.",
             });
         }
-        const clientMailRes = sendClientMailFunc(surname, firstName, email, phoneNumber, checkIn, checkOut, guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber, hotelEmail);
-        const adminMailRes = sendAdminMailFunc(surname, firstName, email, phoneNumber, checkIn, checkOut, guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber, hotelEmail);
+        const clientMailRes = sendClientMailFunc(surname, firstName, email, phoneNumber, checkIn, checkOut, guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber, hotelEmail, roomsCategory, roomsName);
+        const adminMailRes = sendAdminMailFunc(surname, firstName, email, phoneNumber, checkIn, checkOut, guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber, hotelEmail, roomsCategory, roomsName);
         if (!clientMailRes.status) {
             return res.status(500).json({
                 status: false,

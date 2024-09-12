@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Reservation Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #F6A344;
+            color: #ffffff;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content p {
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .content .details {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+        }
+        .content .details p {
+            margin: 5px 0;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #F6A344;
+            color: #ffffff;
+            border-radius: 0 0 8px 8px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="email-container">
+    <div class="header">
+        <h1>New Reservation Alert</h1>
+    </div>
+    <div class="content">
+        <p>Hello Admin,</p>
+
+        <p>A new reservation has been successfully made. Here are the details:</p>
+
+        <div class="details">
+            <p><strong>Client Information:</strong></p>
+            <p><strong>Surname:</strong> {{surname}}</p>
+            <p><strong>First Name:</strong> {{firstName}}</p>
+            <p><strong>Email Address:</strong> {{emailAddress}}</p>
+            <p><strong>Phone Number:</strong> {{phoneNumber}}</p>
+        </div>
+
+        <div class="details">
+            <p><strong>Reservation Details:</strong></p>
+            <p><strong>Check-In Date:</strong> {{checkInDate}}</p>
+            <p><strong>Check-Out Date:</strong> {{checkOutDate}}</p>
+            <p><strong>Guests per Room:</strong> {{guestPerRoom}}</p>
+            <p><strong>Room Name:</strong> {{roomsCategory}} - {{roomsName}}</p>
+
+            <p><strong>Booking Date:</strong> {{bookingDate}}</p>
+        </div>
+
+        <p>
+            Please review the reservation details and prepare for the 
+            guest's arrival. If any issues arise, 
+            contact the client using the provided information.
+        </p>
+
+        <p>Best Regards,<br>{{hotelName}} IT System</p>
+    </div>
+    <div class="footer">
+        <p>&copy; {{year}} {{hotelName}}. All rights reserved.</p>
+    </div>
+</div>
+
+</body>
+</html>
