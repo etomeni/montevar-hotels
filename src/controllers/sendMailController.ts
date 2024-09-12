@@ -15,6 +15,8 @@ export const sendNewBookingMailCtrl = async (req: Request, res: Response, next: 
         const checkIn = req.body.checkIn || "";
         const checkOut = req.body.checkOut || "";
         const guestPerRoom = req.body.guestPerRoom || "";
+        const roomsCategory = req.body.roomsCategory || "";
+        const roomsName = req.body.roomsName || "";
 
         const bookingDate = req.body.bookingDate || getCurrentDateTime();
         const year = req.body.year || new Date().getFullYear();
@@ -33,13 +35,13 @@ export const sendNewBookingMailCtrl = async (req: Request, res: Response, next: 
         const clientMailRes = sendClientMailFunc(
             surname, firstName, email, phoneNumber, checkIn, checkOut,
             guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber,
-            hotelEmail, 
+            hotelEmail, roomsCategory, roomsName
         );
 
         const adminMailRes = sendAdminMailFunc(
             surname, firstName, email, phoneNumber, checkIn, checkOut,
             guestPerRoom, bookingDate, year, hotelName, hotelPhoneNumber,
-            hotelEmail, 
+            hotelEmail, roomsCategory, roomsName
         );
 
         if (!clientMailRes.status ) {

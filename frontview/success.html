@@ -61,24 +61,6 @@
         } */
 
 
-        a#homeBtn {
-            background-color: #F6A344;
-            border: none;
-            outline: none;
-            box-shadow: none;
-            padding: 15px 30px;
-            font-size: 16px;
-            color: #ffffff;
-            text-align: center;
-            border-radius: 8px;
-        }
-
-        a#homeBtn:hover {
-            background-color: #ffbf00;
-            color: #ffffff;
-        }
-
-
         .errorText {
             color: red;
             font-size: 14px;
@@ -120,7 +102,7 @@
                     <tr>
                         <th scope="row" class="contentTitle">Guest Name</th>
                         <td class="contactValue">
-                            <p id="guestName">Mark</p>
+                            <p id="guestName"></p>
                         </td>
                     </tr>
         
@@ -142,6 +124,13 @@
                         <th scope="row" class="contentTitle">Guest Per Room</th>
                         <td class="contactValue">
                             <p id="guestPerRoom"></p>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row" class="contentTitle">Room Name</th>
+                        <td class="contactValue">
+                            <p id="roomsName"></p>
                         </td>
                     </tr>
         
@@ -210,19 +199,13 @@
                 if you have any issue.
             </p>
         </div>
-
-
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <a href="https://www.montevarhotel.com" id="homeBtn"
-            >Go Home</a>
-        </div>
     </section>
 
 
     <script>
         
         function getSessionValue () {
-            const data = JSON.parse(sessionStorage.getItem('bookingReservation'));
+            const data = JSON.parse(localStorage.getItem('bookingReservation'));
 
             if (data && data !== null) {
                 const guestName = document.getElementById("guestName");
@@ -243,6 +226,8 @@
                 const guestPerRoom = document.getElementById("guestPerRoom");
                 guestPerRoom.innerText = data.guestPerRoom;
     
+                const roomsName = document.getElementById("roomsName");
+                roomsName.innerText = data.roomsCategory + " - " + data.roomsName;
     
                 const bookingDate = document.getElementById("bookingDate");
                 bookingDate.innerText = data.bookingDate;

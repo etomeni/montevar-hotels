@@ -10,6 +10,7 @@ export const sendClientMailFunc = (
 
     bookingDate: string, year: string, hotelName: string, 
     hotelPhoneNumber: string, hotelEmail: string, 
+    roomsCategory: string, roomsName: string
 ) => {
     try {
         // console.log(process.env.HOST_EMAIL);
@@ -39,6 +40,9 @@ export const sendClientMailFunc = (
             .replace(/{{guestPerRoom}}/g, guestPerRoom)
             .replace(/{{bookingDate}}/g, bookingDate)
 
+            .replace(/{{roomsCategory}}/g, roomsCategory)
+            .replace(/{{roomsName}}/g, roomsName)
+
             .replace(/{{hotelName}}/g, hotelName)
             .replace(/{{hotelPhoneNumber}}/g, hotelPhoneNumber)
             .replace(/{{hotelEmail}}/g, hotelEmail)
@@ -58,6 +62,7 @@ export const sendClientMailFunc = (
             - Check-In Date: ${checkInDate}
             - Check-Out Date: ${checkOutDate}
             - Guests per Room: ${guestPerRoom}
+            - Room: ${roomsCategory} - ${roomsName}
 
             - Booking Date: ${bookingDate}
             - Hotel Name: ${hotelName}
@@ -112,6 +117,7 @@ export const sendAdminMailFunc = (
 
     bookingDate: string, year: string, hotelName: string, 
     hotelPhoneNumber: string, hotelEmail: string, 
+    roomsCategory: string, roomsName: string
 ) => {
     try {
         // console.log(process.env.HOST_EMAIL);
@@ -167,6 +173,7 @@ export const sendAdminMailFunc = (
             - Check-In Date: ${checkInDate}
             - Check-Out Date: ${checkOutDate}
             - Guests per Room: ${guestPerRoom}
+            - Room Name: ${roomsCategory} - ${roomsName}
             - Booking Date: ${bookingDate}
 
 
